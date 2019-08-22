@@ -1,0 +1,103 @@
+﻿<Window x:Class="ReviewWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReviewWPF"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        xmlns:cm="http://www.caliburnproject.org"
+        xmlns:convert="clr-namespace:ReviewWPF"
+        Title="WPF随笔" Height="550" Width="900" MinWidth="650">
+    <Window.Resources>
+        <convert:IntToSexConvert x:Key="SexConvert"></convert:IntToSexConvert>
+    </Window.Resources>
+    <Window.Triggers>
+        <!--开始事件-->
+        <EventTrigger RoutedEvent="Button.Click" SourceName="btn_start">
+            <BeginStoryboard Name="beginstoryboard1">
+                <Storyboard CurrentTimeInvalidated="Storyboard_CurrentTimeInvalidated">
+                    <DoubleAnimation Storyboard.TargetName="img" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:6"></DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <!--停止动画-->
+        <EventTrigger RoutedEvent="Button.Click" SourceName="btn_pause">
+            <PauseStoryboard BeginStoryboardName="beginstoryboard1"></PauseStoryboard>
+        </EventTrigger>
+        <!--恢复动画-->
+        <EventTrigger RoutedEvent="Button.Click" SourceName="btn_resume">
+            <ResumeStoryboard BeginStoryboardName="beginstoryboard1"></ResumeStoryboard>
+        </EventTrigger>
+        <!--停止动画-->
+        <EventTrigger RoutedEvent="Button.Click" SourceName="btn_stop">
+            <StopStoryboard BeginStoryboardName="beginstoryboard1"></StopStoryboard>
+        </EventTrigger>
+        <!--移除动画-->
+        <EventTrigger RoutedEvent="Button.Click" SourceName="btn_remove">
+            <RemoveStoryboard BeginStoryboardName="beginstoryboard1"></RemoveStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="1"/>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Style="{DynamicResource InfoBtn}" Width="80" Height="30" Margin="10 0 0 0" cm:Message.Attach="ClickMe()">提示框</Button>
+            <Button Style="{DynamicResource InfoBtn}" Name="btnColor" Width="80" Height="30" Margin="10 0 0 0" cm:Message.Attach="ChangeColor()" Content="{Binding BtnContent}"></Button>
+            <Button Style="{DynamicResource InfoBtn}" Width="80" Height="30" Margin="10 0 0 0" cm:Message.Attach="SetTree()">树列表</Button>
+            <Button Style="{DynamicResource InfoBtn}" Width="80" Height="30" Margin="10 0 0 0" cm:Message.Attach="SetDataGrid()">数据表格</Button>
+            <Button Style="{DynamicResource InfoBtn}" Width="80" Height="30" Margin="10 0 0 0" cm:Message.Attach="AnimationBtn()">动画控制</Button>
+        </StackPanel>
+        <Border Grid.Row="1" Height="1" Background="Silver"></Border>
+        <Grid Grid.Row="2">
+            <TextBlock Visibility="{Binding HomeVis}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" TextWrapping="Wrap">
+                WPF（Windows Presentation Foundation）是微软推出的基于Windows 的用户界面框架，属于.NET Framework 3.0的一部分。它提供了统一的编程模型、语言和框架，真正做到了分离界面设计人员与开发人员的工作；同时它提供了全新的多媒体交互用户图形界面。
+            </TextBlock>
+            <Grid Visibility="{Binding ColorVis}" Background="{Binding BkColor}"></Grid>
+            <TreeView Grid.Row="1" ItemsSource="{Binding TreeData}" Visibility="{Binding TreeVis}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <StackPanel Name="TreeItem" Orientation="Horizontal">
+                            <TextBlock Name="treeNode" FontSize="16" LineHeight="25" Text="{Binding DisplayText}" MouseDown="TreeNode_MouseDown" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <DataGrid ItemsSource="{Binding HumanList}" CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                      Visibility="{Binding ListVis}" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="60" Header="序号" Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGridRow}}, Path=Header}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="姓名" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="80" Header="年龄" Binding="{Binding Age}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="80" Header="性别" Binding="{Binding Sex,Converter={StaticResource SexConvert}}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="手机" Binding="{Binding Phone}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="单位" Binding="{Binding Unit}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="邮箱" Binding="{Binding Email}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--动画控制-->
+            <Grid Name="animaGrid" Visibility="{Binding AnimationVis}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Image Name="img" Source="Resource/Image/1.png"></Image>
+                <Border Grid.Row="1" Height="2" Background="Silver"></Border>
+                <Label Name="lblTime" Grid.Row="2" FontSize="18" HorizontalAlignment="Center"></Label>
+                <ProgressBar Name="progressBar1" Grid.Row="3" Width="650"  Margin="20 0"></ProgressBar>
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Name="btn_start" Style="{DynamicResource InfoBtn}" Width="110" Height="30">开始</Button>
+                    <Button Name="btn_pause" Style="{DynamicResource InfoBtn}" Width="110" Height="30" Margin="10 0 0 0">暂停</Button>
+                    <Button Name="btn_resume" Style="{DynamicResource InfoBtn}" Width="110" Height="30" Margin="10 0 0 0">恢复</Button>
+                    <Button Name="btn_stop" Style="{DynamicResource InfoBtn}" Width="110" Height="30" Margin="10 0 0 0">停止</Button>
+                    <Button Name="btn_remove" Style="{DynamicResource InfoBtn}" Width="110" Height="30" Margin="10 0 0 0">移除</Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

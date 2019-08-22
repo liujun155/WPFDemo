@@ -1,0 +1,6 @@
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ProjectResource\obj\Debug\ProjectResource.csprojAssemblyReference.cache
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ProjectResource\obj\Debug\UserControl1.baml
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ProjectResource\obj\Debug\ProjectResource_MarkupCompile.cache
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ProjectResource\obj\Debug\ProjectResource.g.resources
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ProjectResource\obj\Debug\ProjectResource.csproj.CoreCompileInputs.cache
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ProjectResource\obj\Debug\Style\BtnStyle.baml
