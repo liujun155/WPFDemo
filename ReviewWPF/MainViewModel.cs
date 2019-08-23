@@ -19,12 +19,12 @@ namespace ReviewWPF
         private int _clickCount = 1;
         private bool _isChange = true;
         private List<string> Colors = new List<string>() { "Yellow", "Blue", "Green", "Red", "HotPink", "Purple", "Orange" };
-        
+
         private Visibility _homeVis;
         public Visibility HomeVis
         {
             get { return _homeVis; }
-            set { _homeVis = value;NotifyOfPropertyChange(nameof(HomeVis)); }
+            set { _homeVis = value; NotifyOfPropertyChange(nameof(HomeVis)); }
         }
 
         private void InitData()
@@ -185,31 +185,27 @@ namespace ReviewWPF
                 HumanList.Add(human);
             }
         }
-        #endregion
 
-        #region 动画
-        private Visibility _animationVis = Visibility.Collapsed;
-        public Visibility AnimationVis
+
+        #region 表格操作弹框
+        public void AddInfo()
         {
-            get { return _animationVis; }
-            set { _animationVis = value;NotifyOfPropertyChange(nameof(AnimationVis)); }
+            EditViewModel vm = new EditViewModel(null, 1);
+            var view = ViewLocator.LocateForModel(vm, null, null) as Window;
+            if (view != null)
+            {
+                ViewModelBinder.Bind(vm, view, null);
+                view.Owner = Application.Current.MainWindow;
+                view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                view.ShowDialog();
+            }
         }
 
-        public void AnimationBtn()
-        {
-            CloseAllGrid();
-            AnimationVis = Visibility.Visible;
-            if (!_isChange)
-                ChangeColor();
-        }
-        #endregion
-
-        #region 弹框
         public void EditInfo(HumanEnt ent)
         {
-            EditViewModel vm = new EditViewModel();
+            EditViewModel vm = new EditViewModel(ent, 2);
             var view = ViewLocator.LocateForModel(vm, null, null) as Window;
-            if(view != null)
+            if (view != null)
             {
                 ViewModelBinder.Bind(vm, view, null);
                 view.Owner = Application.Current.MainWindow;
@@ -220,15 +216,41 @@ namespace ReviewWPF
 
         public void LookInfo(HumanEnt ent)
         {
-            EditViewModel vm = new EditViewModel();
+            EditViewModel vm = new EditViewModel(ent, 3);
             var view = ViewLocator.LocateForModel(vm, null, null) as Window;
-            if(view != null)
+            if (view != null)
             {
                 ViewModelBinder.Bind(vm, view, null);
                 view.Owner = Application.Current.MainWindow;
                 view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 view.ShowDialog();
             }
+        }
+
+        public void DeleteInfo(HumanEnt ent)
+        {
+            if(MessageBox.Show("确定删除人员" + ent.Name +"?","提示",MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                HumanList.Remove(ent);
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 动画
+        private Visibility _animationVis = Visibility.Collapsed;
+        public Visibility AnimationVis
+        {
+            get { return _animationVis; }
+            set { _animationVis = value; NotifyOfPropertyChange(nameof(AnimationVis)); }
+        }
+
+        public void AnimationBtn()
+        {
+            CloseAllGrid();
+            AnimationVis = Visibility.Visible;
+            if (!_isChange)
+                ChangeColor();
         }
         #endregion
 

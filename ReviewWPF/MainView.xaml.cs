@@ -52,5 +52,31 @@ namespace ReviewWPF
                 progressBar1.Value = (double)storyboardClock.CurrentProgress * 100;
             }
         }
+
+        /// <summary>
+        /// 删除行后序号变更
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DataGridRowEventArgs"/> instance containing the event data.</param>
+        /// 创建人:刘俊  创建时间:2019/8/23 10:12
+        private void HumanDG_UnloadingRow(object sender, DataGridRowEventArgs e)
+        {
+            DataGrid_LoadingRow(sender, e);
+            if (humanDG.Items != null)
+            {
+                for (int i = 0; i < humanDG.Items.Count; i++)
+                {
+                    try
+                    {
+                        DataGridRow row = humanDG.ItemContainerGenerator.ContainerFromIndex(i) as DataGridRow;
+                        if (row != null)
+                        {
+                            row.Header = (i + 1).ToString();
+                        }
+                    }
+                    catch { }
+                }
+            }
+        }
     }
 }
