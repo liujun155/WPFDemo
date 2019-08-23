@@ -204,6 +204,38 @@ namespace ReviewWPF
         }
         #endregion
 
+        #region 弹框
+        public void EditInfo(HumanEnt ent)
+        {
+            EditViewModel vm = new EditViewModel();
+            var view = ViewLocator.LocateForModel(vm, null, null) as Window;
+            if(view != null)
+            {
+                ViewModelBinder.Bind(vm, view, null);
+                view.Owner = Application.Current.MainWindow;
+                view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                view.ShowDialog();
+            }
+        }
+
+        public void LookInfo(HumanEnt ent)
+        {
+            EditViewModel vm = new EditViewModel();
+            var view = ViewLocator.LocateForModel(vm, null, null) as Window;
+            if(view != null)
+            {
+                ViewModelBinder.Bind(vm, view, null);
+                view.Owner = Application.Current.MainWindow;
+                view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                view.ShowDialog();
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 隐藏所有界面
+        /// </summary>
+        /// 创建人:刘俊  创建时间:2019/8/22 17:47
         private void CloseAllGrid()
         {
             HomeVis = Visibility.Collapsed;

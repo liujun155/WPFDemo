@@ -9,13 +9,15 @@ C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\bin\Debug\Caliburn.Micr
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\bin\Debug\Caliburn.Micro.Platform.xml
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\bin\Debug\Caliburn.Micro.Platform.Core.xml
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\Style\BtnStyle.baml
-C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\MainWindow.g.cs
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\Views\EditView.g.cs
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\MainView.g.cs
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\App.g.cs
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\ReviewWPF_MarkupCompile.cache
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\ReviewWPF_MarkupCompile.lref
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\App.baml
-C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\MainWindow.baml
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\Views\EditView.baml
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\MainView.baml
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\ReviewWPF.g.resources
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\ReviewWPF.Properties.Resources.resources
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\ReviewWPF.csproj.GenerateResource.cache

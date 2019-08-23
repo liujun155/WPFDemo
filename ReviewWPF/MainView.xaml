@@ -1,4 +1,4 @@
-﻿<Window x:Class="ReviewWPF.MainWindow"
+﻿<Window x:Class="ReviewWPF.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -75,6 +75,16 @@
                     <DataGridTextColumn Width="*" Header="手机" Binding="{Binding Phone}"></DataGridTextColumn>
                     <DataGridTextColumn Width="*" Header="单位" Binding="{Binding Unit}"></DataGridTextColumn>
                     <DataGridTextColumn Width="*" Header="邮箱" Binding="{Binding Email}"></DataGridTextColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{DynamicResource OperateBtn}" cm:Message.Attach="EditInfo($this)">编辑</Button>
+                                    <Button Style="{DynamicResource OperateBtn}" cm:Message.Attach="LookInfo($this)">查看</Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <!--动画控制-->
