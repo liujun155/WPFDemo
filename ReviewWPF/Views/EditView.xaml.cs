@@ -24,5 +24,29 @@ namespace ReviewWPF
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.Title == "添加")
+            {
+                ageText.Text = "";
+            }
+        }
+
+        private void AgeText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tx = sender as TextBox;
+            if (!string.IsNullOrEmpty(tx.Text))
+            {
+                int num;
+                if (!int.TryParse(tx.Text, out num))
+                {
+                    MessageBox.Show("输入错误", "提示");
+                    tx.Text = "";
+                }
+            }
+            else
+                tx.Text = null;
+        }
     }
 }

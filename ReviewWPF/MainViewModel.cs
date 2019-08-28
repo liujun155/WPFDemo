@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using ReviewWPF.DataOperate;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -177,13 +178,16 @@ namespace ReviewWPF
             if (!_isChange)
                 ChangeColor();
             HumanList = new BindableCollection<HumanEnt>();
-            List<string> names = new List<string>() { "刘一", "陈二", "张三", "李四", "王五", "赵六", "孙七", "周八", "吴九", "郑十" };
-            Random r = new Random();
-            for (int i = 1; i <= 5; i++)
-            {
-                HumanEnt human = new HumanEnt() { ID = i, Name = names[r.Next(0, 10)], Sex = r.Next(1, 3), Age = r.Next(18, 61), Phone = r.Next(139123, 139456).ToString(), Education = EducationEnum.本科, Email = "123@163.com", Birthday = DateTime.Now.AddDays(i - 1) };
-                HumanList.Add(human);
-            }
+            List<HumanEnt> list = HumanService.GetHumanList();
+            if (list?.Count > 0)
+                HumanList = new BindableCollection<HumanEnt>(list);
+            //List<string> names = new List<string>() { "刘一", "陈二", "张三", "李四", "王五", "赵六", "孙七", "周八", "吴九", "郑十" };
+            //Random r = new Random();
+            //for (int i = 1; i <= 5; i++)
+            //{
+            //    HumanEnt human = new HumanEnt() { ID = i, Name = names[r.Next(0, 10)], Sex = r.Next(1, 3), Age = r.Next(18, 61), Phone = r.Next(139123, 139456).ToString(), Education = EducationEnum.本科, Email = "123@163.com", Birthday = DateTime.Now.AddDays(i - 1) };
+            //    HumanList.Add(human);
+            //}
         }
 
 
@@ -199,6 +203,7 @@ namespace ReviewWPF
                 view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 view.ShowDialog();
             }
+            SetDataGrid();
         }
 
         public void EditInfo(HumanEnt ent)
@@ -212,6 +217,7 @@ namespace ReviewWPF
                 view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 view.ShowDialog();
             }
+            SetDataGrid();
         }
 
         public void LookInfo(HumanEnt ent)
@@ -231,7 +237,13 @@ namespace ReviewWPF
         {
             if (MessageBox.Show("确定删除人员" + ent.Name + "?", "提示", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                HumanList.Remove(ent);
+                if (HumanService.DeleteHuman(ent.ID))
+                {
+                    MessageBox.Show("删除成功", "提示");
+                    HumanList.Remove(ent);
+                }
+                else
+                    MessageBox.Show("删除失败", "提示");
             }
         }
         #endregion
@@ -427,12 +439,12 @@ namespace ReviewWPF
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
+        public int? Age { get; set; }
         public int Sex { get; set; }
         public string Phone { get; set; }
         public EducationEnum Education { get; set; }
         public string Email { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
     }
 
     public enum EducationEnum
