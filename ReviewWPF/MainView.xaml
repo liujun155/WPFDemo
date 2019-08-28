@@ -65,14 +65,14 @@
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Visibility="{Binding ListVis}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Button Style="{DynamicResource OperateBtn}" HorizontalAlignment="Right" Margin="0 0 20 0" cm:Message.Attach="AddInfo()">添加</Button>
                 <DataGrid Name="humanDG" Grid.Row="1" ItemsSource="{Binding HumanList}" CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
-                      Visibility="{Binding ListVis}" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow" HeadersVisibility="Column"
+                          VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow" HeadersVisibility="Column"
                           UnloadingRow="HumanDG_UnloadingRow">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="60" Header="序号" Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGridRow}}, Path=Header}">
@@ -89,14 +89,21 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Width="80" Header="年龄" Binding="{Binding Age}">
+                        <DataGridTextColumn Width="60" Header="年龄" Binding="{Binding Age}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Width="80" Header="性别" Binding="{Binding Sex,Converter={StaticResource SexConvert}}">
+                        <DataGridTextColumn Width="100" Header="生日" Binding="{Binding Birthday,StringFormat={}{0:yyyy年MM月dd日}}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="60" Header="性别" Binding="{Binding Sex,Converter={StaticResource SexConvert}}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -110,27 +117,27 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Width="*" Header="单位" Binding="{Binding Unit}">
+                        <DataGridTextColumn Width="*" Header="学历" Binding="{Binding Education}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Width="*" Header="邮箱" Binding="{Binding Email}">
+                        <DataGridTextColumn Width="100" Header="邮箱" Binding="{Binding Email}">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="240" Header="操作">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{DynamicResource OperateBtn}" cm:Message.Attach="EditInfo($this)">编辑</Button>
-                                        <Button Style="{DynamicResource OperateBtn}" cm:Message.Attach="LookInfo($this)">查看</Button>
-                                        <Button Style="{DynamicResource DangerBtn}" cm:Message.Attach="DeleteInfo($this)">删除</Button>
+                                        <Button Style="{DynamicResource OperateBtn}" Margin="5" cm:Message.Attach="EditInfo($this)">编辑</Button>
+                                        <Button Style="{DynamicResource OperateBtn}" Margin="5" cm:Message.Attach="LookInfo($this)">查看</Button>
+                                        <Button Style="{DynamicResource DangerBtn}" Margin="5" cm:Message.Attach="DeleteInfo($this)">删除</Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

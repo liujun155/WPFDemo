@@ -5,10 +5,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ReviewWPF;component/Style/BtnStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary>
                     <local:Bootstrapper x:Key="bootstrapper" />
                 </ResourceDictionary>
+                <ResourceDictionary Source="/ReviewWPF;component/Style/BtnStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/ReviewWPF;component/Style/FormControlStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

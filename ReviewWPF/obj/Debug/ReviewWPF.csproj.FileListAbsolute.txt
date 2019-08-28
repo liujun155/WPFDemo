@@ -26,3 +26,4 @@ C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\ReviewWPF.csp
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\ReviewWPF.exe
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\ReviewWPF.pdb
 C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\ReviewWPF.csprojAssemblyReference.cache
+C:\Users\liujun.SEENSUN\source\repos\ReviewWPF\ReviewWPF\obj\Debug\Style\FormControlStyle.baml

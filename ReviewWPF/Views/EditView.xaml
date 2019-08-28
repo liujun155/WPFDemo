@@ -4,10 +4,97 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ReviewWPF"
+      xmlns:cm="http://www.caliburnproject.org"
+      xmlns:assembly="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="400" Height="450" Width="400"
       Title="{Binding Title}">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="EduEnum" MethodName="GetValues" ObjectType="{x:Type assembly:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="local:EducationEnum"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <Style TargetType="TextBlock" x:Key="TitleStyle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="240"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="240"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="240"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid Name="EditGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource TitleStyle}" FontSize="18">姓名：</TextBlock>
+            <TextBox Grid.Column="1" Text="{Binding Human.Name}"></TextBox>
+            <TextBlock Grid.Row="1" Style="{StaticResource TitleStyle}" FontSize="18">年龄：</TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Human.Age}"></TextBox>
+            <TextBlock Grid.Row="2" Style="{StaticResource TitleStyle}" FontSize="18">生日：</TextBlock>
+            <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Human.Birthday}"></DatePicker>
+            <TextBlock Grid.Row="3" Style="{StaticResource TitleStyle}" FontSize="18">性别：</TextBlock>
+            <ComboBox Grid.Row="3" Grid.Column="1" SelectedItem="{Binding SelSex}" ItemsSource="{Binding SexList}"></ComboBox>
+            <TextBlock Grid.Row="4" Style="{StaticResource TitleStyle}" FontSize="18">手机：</TextBlock>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Human.Phone}"></TextBox>
+            <TextBlock Grid.Row="5" Style="{StaticResource TitleStyle}" FontSize="18">学历：</TextBlock>
+            <ComboBox Grid.Row="5" Grid.Column="1" SelectedItem="{Binding Human.Education}" ItemsSource="{Binding Source={StaticResource EduEnum}}"></ComboBox>
+            <TextBlock Grid.Row="6" Style="{StaticResource TitleStyle}" FontSize="18">邮箱：</TextBlock>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Human.Email}"></TextBox>
+            <StackPanel Grid.ColumnSpan="2" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{DynamicResource InfoBtn}" cm:Message.Attach="BtnOK()">确定</Button>
+                <Button Style="{DynamicResource InfoBtn}" cm:Message.Attach="BtnCancel()" Margin="20 0 0 0">取消</Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

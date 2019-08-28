@@ -179,9 +179,9 @@ namespace ReviewWPF
             HumanList = new BindableCollection<HumanEnt>();
             List<string> names = new List<string>() { "刘一", "陈二", "张三", "李四", "王五", "赵六", "孙七", "周八", "吴九", "郑十" };
             Random r = new Random();
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i <= 5; i++)
             {
-                HumanEnt human = new HumanEnt() { ID = i, Name = names[r.Next(0, 10)], Sex = r.Next(1, 3), Age = r.Next(18, 61), Phone = "123456", Unit = "心像", Email = "123@163.com" };
+                HumanEnt human = new HumanEnt() { ID = i, Name = names[r.Next(0, 10)], Sex = r.Next(1, 3), Age = r.Next(18, 61), Phone = r.Next(139123, 139456).ToString(), Education = EducationEnum.本科, Email = "123@163.com", Birthday = DateTime.Now.AddDays(i - 1) };
                 HumanList.Add(human);
             }
         }
@@ -229,7 +229,7 @@ namespace ReviewWPF
 
         public void DeleteInfo(HumanEnt ent)
         {
-            if(MessageBox.Show("确定删除人员" + ent.Name +"?","提示",MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (MessageBox.Show("确定删除人员" + ent.Name + "?", "提示", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 HumanList.Remove(ent);
             }
@@ -430,7 +430,19 @@ namespace ReviewWPF
         public int Age { get; set; }
         public int Sex { get; set; }
         public string Phone { get; set; }
-        public string Unit { get; set; }
+        public EducationEnum Education { get; set; }
         public string Email { get; set; }
+        public DateTime Birthday { get; set; }
+    }
+
+    public enum EducationEnum
+    {
+        小学 = 1,
+        初中,
+        高中,
+        本科,
+        专科,
+        硕士,
+        博士
     }
 }
